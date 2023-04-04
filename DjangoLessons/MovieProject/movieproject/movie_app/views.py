@@ -11,8 +11,8 @@ def show_all_movie(request):
     # movies = Movie.objects.order_by(F('rating').asc(nulls_last=True), 'rating')
     movies = Movie.objects.annotate(
         new_field_bool=Value(True),
-        new_budget=F('budget')+100,
-        fff=F('rating')*F('year'),
+        new_budget=F('budget') + 100,
+        fff=F('rating') * F('year'),
     )
     agg = movies.aggregate(Avg('budget'), Max('rating'), Min('rating'), Count('id'))
     return render(request, 'movie_app/all_movies.html', {
@@ -28,3 +28,18 @@ def show_one_movie(request, slug_movie: str):
     })
 
 
+def show_directors(request):
+    li_elements = ''
+    # for director in
+
+
+def info_director(request):
+    return render(request, 'movie_app/info_director.html')
+
+
+def show_actors(request):
+    return render(request, 'movie_app/all_actors.html')
+
+
+def info_actor(request):
+    return render(request, 'movie_app/info_actor.html')
