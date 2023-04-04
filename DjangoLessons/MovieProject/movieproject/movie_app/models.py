@@ -7,9 +7,13 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
+class Director(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    director_mail = models.EmailField()
+
 
 class Movie(models.Model):
-
     EUR = 'EUR'
     USD = 'USD'
     RUB = 'RUB'
@@ -28,7 +32,6 @@ class Movie(models.Model):
                                  validators=[MinValueValidator(1)])
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='RUB')
     slug = models.SlugField(default='', null=False, db_index=True)
-    director = models.CharField(max_length=100, default="Квентин Тарантино")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
