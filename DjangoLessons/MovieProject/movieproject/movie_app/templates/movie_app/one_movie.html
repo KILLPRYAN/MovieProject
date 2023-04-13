@@ -7,5 +7,17 @@
   <h3>Рейтинг: {{movie.rating}}%</h3>
   <h3>Год выхода: {{movie.year|default:'Неизвестен'}} г.</h3>
   <h3>Бюджет: {{movie.budget}} $</h3>
+  <hr>
+  <h3>Информация о режиссере</h3>
+  <h3>Имя: {{movie.director.first_name}}</h3>
+  <h3>Фамилия: {{movie.director.last_name}}</h3>
+  <h3>Почта: {{movie.director.director_mail}}</h3>
+  <hr>
+  <h3>Список актеров</h3>
+  <ul>
+    {% for actor in movie.actors.all %}
+      <li>{{actor}}</li>
+    {% endfor %}
+  </ul>
 
 {% endblock %}

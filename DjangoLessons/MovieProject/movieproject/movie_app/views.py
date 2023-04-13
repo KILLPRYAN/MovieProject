@@ -1,7 +1,7 @@
 from urllib import request
 
 from django.shortcuts import render, get_object_or_404
-from .models import Movie
+from .models import Movie, Director, Actor
 from django.db.models import F, Sum, Max, Min, Count, Avg, Value
 
 
@@ -29,17 +29,28 @@ def show_one_movie(request, slug_movie: str):
 
 
 def show_directors(request):
-    li_elements = ''
-    # for director in
+    directors = Director.objects.all()
+    return render(request, "movie_app/all_directors.html", context={
+        'directors': directors
+    })
 
 
-def info_director(request):
-    return render(request, 'movie_app/info_director.html')
+def info_director(request, id_director: int):
+    dir = get_object_or_404(Director, id=id_director)
+    return render(request, "movie_app/one_director.html", context={
+        'dir': dir,
+    })
 
 
 def show_actors(request):
-    return render(request, 'movie_app/all_actors.html')
+    actors = Actor.objects.all()
+    return render(request, "movie_app/all_actors.html", context={
+        'actors': actors
+    })
 
 
-def info_actor(request):
-    return render(request, 'movie_app/info_actor.html')
+def info_actor(request, id_actor: int):
+    actor = get_object_or_404(Actor, id=id_actor)
+    return render(request, "movie_app/one_actor.html", context={
+        'actor': actor
+    })

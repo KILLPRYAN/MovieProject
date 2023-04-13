@@ -12,6 +12,9 @@ class Director(models.Model):
     last_name = models.CharField(max_length=100)
     director_mail = models.EmailField()
 
+    def get_url(self):
+        return reverse('director_detail', args=[self.id])
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -27,6 +30,9 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+
+    def get_url(self):
+        return reverse('actor_detail', args=[self.id])
 
     def __str__(self):
         if self.gender == self.MALE:
@@ -66,3 +72,6 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.name}-{self.rating}%"
+
+# python3 manage.py shell_plus --print-sql
+# from movie_app.models import Movie
